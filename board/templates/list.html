@@ -5,6 +5,8 @@
     <title>List</title>
 </head>
 <body>
-
+    {% for row_data in rows %}
+        <div>no:[{{ row_data[0]}}] - content:[{{ row_data[1] }}] - writer:[{{ row_data[2] }}] - read:[{{ row_data[3] }}]</div>
+    {% endfor %}
 </body>
 </html>
