@@ -4,17 +4,9 @@ import pymysql
 from flask import render_template, request, current_app
 from board.board_blueprint import board
 
-@board.route('/join')
-def join():
-    return render_template('join.html')
-
-@board.route('/join_process', methods=['POST'])
-def join_process():
-    id = request.form['id']
-    password = request.form['password_1']
-    email = request.form['email']
-
-    print('id:[%s] password:[%s] email:[%s]' % (id, password, email))
+@board.route('/list', methods=['GET'])
+def list():
+    page = request.args.get('page')
 
     db_address = current_app.config['DB_ADDRESS']
     db_port = current_app.config['DB_PORT']
@@ -31,10 +23,14 @@ def join_process():
 
     try:
         cursor = conn.cursor()
-        sql = "INSERT INTO users(id, password, email) VALUES('%s', '%s', '%s')" % (id, password, email)
+        sql = "SELECT `no`, `content`, `writer`, `read` FROM board ORDER BY `write_time` DESC"
         cursor.execute(sql)
-        conn.commit()
+        rows = cursor.fetchall()
+
+        for row_data in rows:
+            print('no:[%s] content:[%s] writer:[%s] read:[%s]' % (row_data[0], row_data[1], row_data[2], row_data[3]))
+
     finally:
         conn.close()
 
-    return render_template('join.html')
+    return render_template('list.html', rows=rows)
