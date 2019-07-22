@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-__all__ = ['index', 'join', 'login', 'list']
+__all__ = ['index', 'join', 'login', 'list', 'write']
