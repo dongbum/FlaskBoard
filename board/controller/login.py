@@ -38,9 +38,10 @@ def login_page():
 
 @board.route('/login', methods=['POST'])
 def login_process():
-
+    next_url = request.args.get('next')
     id = request.form['id']
     password = request.form['password']
+
 
     db_address = current_app.config['DB_ADDRESS']
     db_port = current_app.config['DB_PORT']
@@ -66,11 +67,25 @@ def login_process():
 
         if rows:
             for row_data in rows:
-                print('usn:[%s] id:[%s] email:[%s] update_time:[%s]' % (row_data[0], row_data[1], row_data[2], row_data[3]))
+                session.parmanent = True
+                usn = row_data[0]
+                id = row_data[1]
+                email = row_data[2]
+                update_time = row_data[3]
+                print('usn:[%s] id:[%s] email:[%s] update_time:[%s]' % (usn, id, email, update_time))
+
+                session['usn'] = usn
+                session['user'] = id
+                session['email'] = email
+
+            if next_url != '':
+                return redirect(url_for(next_url))
+            else:
+                return redirect(url_for('.index'))
         else:
             print('Cannot found user')
 
     finally:
         conn.close()
 
-    return render_template('login.html')
+    return render_template('login.html', next_url=next_url)
