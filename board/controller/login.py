@@ -31,8 +31,8 @@ def login_required(f):
 @board.route('/login')
 def login_page():
     next_url = request.args.get('next', '')
-    id = request.form['id']
-    password = request.form['password']
+    id = request.args.get('id', '')
+    password = request.args.get('password', '')
 
     return render_template('login.html')
 
@@ -64,8 +64,11 @@ def login_process():
         cursor.execute(sql)
         rows = cursor.fetchall()
 
-        for row_data in rows:
-            print('usn:[%s] id:[%s] email:[%s] update_time:[%s]' % (row_data[0], row_data[1], row_data[2], row_data[3]))
+        if rows:
+            for row_data in rows:
+                print('usn:[%s] id:[%s] email:[%s] update_time:[%s]' % (row_data[0], row_data[1], row_data[2], row_data[3]))
+        else:
+            print('Cannot found user')
 
     finally:
         conn.close()
