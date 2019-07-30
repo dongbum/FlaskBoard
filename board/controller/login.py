@@ -12,10 +12,11 @@ def login_required(f):
     def decorated_function(*args, **kwargs):
         try:
             session_key = request.cookies.get(current_app.config['SESSION_COOKIE_NAME'])
+            print('session_key:[%s]' % session_key)
 
             is_login = False
 
-            if session.sid == session_key and session.__contains__('user_info'):
+            if session.sid == session_key and session.__contains__('usn'):
                 is_login = True
 
             if not is_login:
@@ -41,7 +42,6 @@ def login_process():
     next_url = request.args.get('next')
     id = request.form['id']
     password = request.form['password']
-
 
     db_address = current_app.config['DB_ADDRESS']
     db_port = current_app.config['DB_PORT']
@@ -78,10 +78,10 @@ def login_process():
                 session['user'] = id
                 session['email'] = email
 
-            if next_url != '':
+            if next_url != '' and next_url != None:
                 return redirect(url_for(next_url))
             else:
-                return redirect(url_for('.index'))
+                return redirect(url_for('.list'))
         else:
             print('Cannot found user')
 

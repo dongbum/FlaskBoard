@@ -58,4 +58,6 @@ def create_app():
 
     flask_board_app.jinja_env.globals['url_for_other_page'] = url_for_other_page
 
+    flask_board_app.secret_key = flask_board_app.config['SESSION_COOKIE_NAME']
+
     return flask_board_app

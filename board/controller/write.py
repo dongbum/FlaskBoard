@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pymysql
-from flask import render_template, request, current_app
+from flask import render_template, request, redirect, url_for, current_app
 from board.board_blueprint import board
 
 @board.route('/write', methods=['GET', 'POST'])
@@ -36,8 +36,6 @@ def write():
             conn.commit()
         finally:
             conn.close()
-
-    else:
-        print('NULL')
+            return redirect(url_for('.list'))
 
     return render_template('write.html')
