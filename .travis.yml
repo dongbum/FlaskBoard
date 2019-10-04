@@ -1,0 +1,17 @@
+language: python
+services:
+  - mysql
+python:
+  - "3.6"
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+install:
+  - pip install -r requirements.txt
+  - pip install coverage
+  - pip install coveralls
+  - pip install nose
+  - pip install nose-exclude
+script:
+  - nosetests --with-coverage --cover-erase --cover-package=board
+after_success:
+  - coveralls
