@@ -1,10 +1,26 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
-    {% for row_data in rows %}
-        <div>no:[{{ row_data[0]}}] - content:[{{ row_data[1] }}] - writer:[{{ row_data[2] }}] - read:[{{ row_data[3] }}]</div>
-    {% endfor %}
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row_data in rows %}
+            <tr>
+                <td>no:[{{ row_data[0]}}]</td>
+                <td>content:[{{ row_data[1] }}]</td>
+                <td>writer:[{{ row_data[2] }}]</td>
+                <td>read:[{{ row_data[3] }}]</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <br />
     <br />
     <div><a href="/write">글쓰기</a></div>
