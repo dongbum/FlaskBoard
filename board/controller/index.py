@@ -5,4 +5,4 @@ from board.board_blueprint import board
 
 @board.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', title='Index Page')

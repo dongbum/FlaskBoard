@@ -88,4 +88,4 @@ def login_process():
     finally:
         conn.close()
 
-    return render_template('login.html', next_url=next_url)
+    return render_template('login.html', next_url=next_url, title='Member Login')
