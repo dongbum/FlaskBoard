@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block content %}
     <form action="" method="post">
         <p>writer : <input type="text" name="writer"></p>
         <p>text : <input type="text" name="content"></p>
         <p><input type="submit" value="Submit"></p>
     </form>
-</body>
-</html>
+{% endblock %}

@@ -37,4 +37,4 @@ def join_process():
     finally:
         conn.close()
 
-    return render_template('join.html')
+    return render_template('join.html', title='Member Join')

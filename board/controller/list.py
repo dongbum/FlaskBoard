@@ -33,4 +33,4 @@ def list():
     finally:
         conn.close()
 
-    return render_template('list.html', rows=rows)
+    return render_template('list.html', rows=rows, title='Article List')

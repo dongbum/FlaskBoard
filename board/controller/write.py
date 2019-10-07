@@ -38,4 +38,4 @@ def write():
             conn.close()
             return redirect(url_for('.list'))
 
-    return render_template('write.html')
+    return render_template('write.html', title='Article Write')
