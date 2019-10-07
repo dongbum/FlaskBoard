@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <table>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>번호</th>
@@ -13,10 +13,10 @@
         <tbody>
             {% for row_data in rows %}
             <tr>
-                <td>no:[{{ row_data[0]}}]</td>
-                <td>content:[{{ row_data[1] }}]</td>
-                <td>writer:[{{ row_data[2] }}]</td>
-                <td>read:[{{ row_data[3] }}]</td>
+                <td>{{ row_data[0]}}</td>
+                <td>{{ row_data[1] }}</td>
+                <td>{{ row_data[2] }}</td>
+                <td>{{ row_data[3] }}</td>
             </tr>
             {% endfor %}
         </tbody>
