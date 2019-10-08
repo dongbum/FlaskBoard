@@ -3,6 +3,8 @@ services:
   - mysql
 python:
   - "3.6"
+env:
+  - FLASK_ENV=development
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
 install:
